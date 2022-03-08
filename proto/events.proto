@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option go_package = "proto/pb" ;
+
+message Empty {}
+
+message Request{
+    string TypeEvent = 1;
+    string Context = 2;
+    float Price = 3;
+
+}
+
+message Status {
+    string Status = 1;
+}
+message Event{
+    uint32 ID =1;
+    string TypeEvent = 2;
+    string Context = 3;
+    float Price = 4; 
+}
+
+message FindResponse{
+    repeated Event events = 1;
+}
+
+service SendEvent {
+    rpc RequestMessage (Request) returns (Status){}
+    rpc FindEvents (Empty) returns (FindResponse){}
+
+}

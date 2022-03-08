@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    ports:
+      - "50051:50051"
+      - "8080:8080"
+    depends_on:
+      - pglsb
+    networks:
+      - backend
+    volumes:
+      - .:/app
+
+  pglsb:
+    image: postgres:14.2
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+    restart: always
+    environment:
+      POSTGRES_USER: rodrigo
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: events
+networks:
+  backend:
